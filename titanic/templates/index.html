@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
@@ -23,18 +23,19 @@
 
 </head>
 <body class="center">
-    <center><h1 style="color: rgb(46, 134, 185); font-weight: 700;">
+    <h1 style="color: rgb(46, 134, 185); font-weight: 700;">
         <i class="fas fa-ship"></i>
         Titanic Model Prediction
-    </h1></center>
+    </h1>
     
     <p style="color: rgb(12, 12, 12); font-weight: 700;">
         Dự đoán một hành khách đã chết hay còn sống
     </p>
 
-    <form>
+    <form action="result">
+        {% csrf_token %}
         <div class="form-group">
-            <input class="form-control" placeholder="Passenger Class(1, 2, or 3)" required type="text" name="pclass" style="width: 700;">
+            <input class="form-control" placeholder="Passenger Class(1, 2, or 3)" required type="text" name="pclass">
         </div>
         <div class="form-group">
             <input class="form-control" placeholder="Sex(0-male, 1-female)" required type="text" name="sex"> 
@@ -61,7 +62,7 @@
             <input class="form-control" placeholder="Embark S (1 if applies)" required type="text" name="embS">
         </div>
 
-        <input class="btn btn-primary btn-lg btn-block" type="submit" value='Predict'>
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value='Predict' height="">
 
     </form>
     
