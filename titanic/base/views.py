@@ -6,7 +6,7 @@ def home(request):
 
 def getPredictions(pclass, sex, age, sibsp, parch, fare, C, Q, S):
     model = pickle.load(open('model.sav', 'rb'))
-    scaled = pickle.load(open('scler.sav', 'rb'))
+    scaled = pickle.load(open('scaler.sav', 'rb'))
 
     prediction = model.predict(scaled.transform([
         [pclass, sex, age, sibsp, parch, fare, C, Q, S]
@@ -19,5 +19,19 @@ def getPredictions(pclass, sex, age, sibsp, parch, fare, C, Q, S):
     else:
         return 'error'
 
+def result(request):
+    pclass = int(request.GET['pclass'])
+    sex = int(request.GET['sex'])
+    age = int(request.GET['age'])
+    sibsp = int(request.GET['sibsp'])
+    parch = int(request.GET['parch'])
+    fare = int(request.GET['fare'])
+    embC = int(request.GET['embC'])
+    embQ = int(request.GET['embQ'])
+    embS = int(request.GET['embS'])
 
+    result = getPredictions(pclass, sex, age, sibsp,
+                            parch, fare, embC, embQ, embS)
+    
+    return render(request, 'result.html', {'result': result})
 
